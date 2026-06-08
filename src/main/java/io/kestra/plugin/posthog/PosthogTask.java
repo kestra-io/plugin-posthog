@@ -1,5 +1,6 @@
 package io.kestra.plugin.posthog;
 
+import io.kestra.core.models.annotations.Example;
 import io.kestra.core.models.annotations.Plugin;
 import io.kestra.core.models.property.Property;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -22,7 +23,7 @@ import org.slf4j.Logger;
 )
 @Plugin(
     examples = {
-        @io.kestra.core.models.annotations.PosthogTask(
+        @Example(
             title = "Simple revert",
             code = { "format: \"Text to be reverted\"" }
         )
