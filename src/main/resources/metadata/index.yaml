@@ -1,8 +1,8 @@
 group: io.kestra.plugin.posthog
 name: "posthog"
-title: "Posthog"
-description: "Posthog plugin for Kestra"
-body: ""
+title: "PostHog"
+description: "Tasks that capture analytics events, identify users, manage groups, and evaluate feature flags in PostHog."
+body: "Provide a PostHog project API key (phc_…) and host to capture single or batched events, identify users, create aliases and groups, and evaluate feature flags. A polling trigger reads new events through the PostHog Query API with a personal API key and a project ID."
 videos: []
 createdBy: "Kestra Core Team"
 managedBy: "Kestra Core Team"

@@ -1,7 +1,7 @@
 @PluginSubGroup(
-    title = "Posthog",
-    description = "Posthog plugin for Kestra",
-    categories = PluginSubGroup.PluginCategory.DATA
+    title = "PostHog",
+    description = "Tasks that capture single or batched PostHog analytics events, identify users, create aliases and groups, and evaluate feature flags, plus a trigger that polls for new events through the PostHog Query API.",
+    categories = PluginSubGroup.PluginCategory.BUSINESS
 )
 package io.kestra.plugin.posthog;
 

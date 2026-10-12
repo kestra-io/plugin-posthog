@@ -35,18 +35,36 @@
 </p>
 <p align="center" style="color:grey;"><i>Get started with Kestra in 3 minutes.</i></p>
 
-# Kestra Posthog Plugin
+# Kestra PostHog Plugin
 
 ## Why
 
-- What user problem does this solve? Teams need a concrete starting point for building and validating new Kestra plugins without recreating the same project scaffolding from scratch.
-- Why would a team adopt this plugin in a workflow? It gives plugin authors a ready-made reference repo they can adapt alongside their own build, test, and publishing workflow.
-- What operational/business outcome does it enable? It shortens plugin delivery time, reduces setup mistakes, and makes internal or partner plugin development more repeatable.
+- What user problem does this solve? Teams that send events to PostHog from pipelines and backend automation often do it with ad-hoc scripts or custom HTTP calls, which are hard to reuse and to observe.
+- Why would a team adopt this plugin in a workflow? It keeps PostHog steps in the same Kestra flow as the rest of the pipeline, with Kestra expressions, secrets and execution history, and without custom scripting.
+- What operational/business outcome does it enable? Teams can correlate workflow runs with product analytics: instrument pipelines with PostHog events, update users and groups, evaluate feature flags, and react to new events from Kestra.
 
 ## What
 
 - Provides plugin components under `io.kestra.plugin.posthog`.
-- Includes classes such as `Example`, `Trigger`.
+- Tasks:
+  - `Capture` sends one event.
+  - `CaptureBatch` sends many events from a list or a file.
+  - `Identify` sets person properties.
+  - `Alias` links two identifiers of the same user.
+  - `Group` creates or updates a group and its properties.
+  - `EvaluateFeatureFlag` evaluates a feature flag for a user.
+- Trigger:
+  - `NewEvent` polls PostHog for new events and starts a flow with them.
+- The tasks use the official PostHog Java SDK (`com.posthog:posthog-server`). `NewEvent` uses the PostHog Query API (HogQL).
+
+## Authentication
+
+PostHog uses two different credentials, and this plugin uses each of them in a different place:
+
+- **Tasks** (`Capture`, `CaptureBatch`, `Identify`, `Alias`, `Group`, `EvaluateFeatureFlag`): the project API key (`phc_...`) as `apiKey`, and the PostHog ingestion `host`, for example `https://us.i.posthog.com`.
+- **`NewEvent` trigger**: a personal API key (`phx_...`) as `personalApiKey`, the numeric `projectId`, and the PostHog application `host`, for example `https://us.posthog.com`. The project API key is not used here.
+
+Provide keys through Kestra secrets, for example `{{ secret('POSTHOG_API_KEY') }}`. See [the plugin documentation](src/main/resources/doc/io.kestra.plugin.posthog.md) for the details of each task and of the trigger.
 
 ## Documentation
 * Full documentation can be found under: [kestra.io/docs](https://kestra.io/docs)
