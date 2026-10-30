@@ -51,7 +51,7 @@ dependencies {
     compileOnly group: "io.kestra", name: "script", version: kestraVersion
 
     // PostHog server-side SDK
-    implementation "com.posthog:posthog-server:2.21.1"
+    implementation "com.posthog:posthog-server:2.21.3"
 }
 
 
